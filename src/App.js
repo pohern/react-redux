@@ -6,33 +6,31 @@ function App() {
   // 1. Hardcode UI
   // 2. Hardcode data, and set UI to use data
   // 3. Dynamically get my data.
-  const [posts, setPosts] = useState([
-    {
-      userId: 1,
-      id: 1,
-      title:
-        "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: "qui est esse",
-      body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+  const [myPosts, setMyPosts] = useState([])
 
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        setPosts(res.data) 
+        const filteredPosts = res.data.filter(post => post.userId === 1) 
+        setMyPosts(filteredPosts)
+      })
       .catch((err) => console.log(err));
   }, []);
   return (
     <div className='container'>
       <div className='row'>
         <div className='col-6'>
+          <h1>All Posts</h1>
           {posts.map((post) => (
+            <Post {...post} key={post.id} />
+          ))}
+        </div>
+        <h1>My Posts</h1>
+        <div className='col-6'>
+          {myPosts.map((post) => (
             <Post {...post} key={post.id} />
           ))}
         </div>
