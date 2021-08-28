@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Post from './components/Post/Post'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Post from "./components/Post/Post";
 
 function App() {
   // 1. Hardcode UI
@@ -21,6 +21,13 @@ function App() {
       body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
     },
   ]);
+
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className='container'>
       <div className='row'>
