@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Post from './components/Post/Post'
+import axios from 'axios'
+
 function App() {
   // 1. Hardcode UI
   // 2. Hardcode data, and set UI to use data
