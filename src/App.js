@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Post from "./components/Post/Post";
+import Posts from "./components/Posts/Posts";
 
 function App() {
   // 1. Hardcode UI
@@ -22,18 +22,20 @@ function App() {
   return (
     <div className='container'>
       <div className='row'>
-        <div className='col-6'>
+        <Posts posts={posts} title='All Posts' />
+        <Posts posts={myPosts} title='My Posts' />
+        {/* <div className='col-6'>
           <h1>All Posts</h1>
           {posts.map((post) => (
             <Post {...post} key={post.id} />
           ))}
-        </div>
-        <h1>My Posts</h1>
+        </div> */}
+        {/* <h1>My Posts</h1>
         <div className='col-6'>
           {myPosts.map((post) => (
             <Post {...post} key={post.id} />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
